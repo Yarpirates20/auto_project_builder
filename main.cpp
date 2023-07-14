@@ -11,6 +11,10 @@ int main()
 	string projectName = getProjectName();
 	string author = getAuthorName();
 
+	cout << "\n## PROJECT DETAILS ##\n"
+		<< "Project name: " << projectName << '\n'
+		<< "Author:       " << author << '\n';
+
 
 	return 0;
 }
