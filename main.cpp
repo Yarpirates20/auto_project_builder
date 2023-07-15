@@ -49,6 +49,8 @@ int main()
 	auto err = std::error_code{};
 	auto basepath = fs::path{ "C:\\Users\\rsamo\\test" };
 	auto path = basepath / projectName;
+	path.make_preferred();
+
 
 	auto success = fs::create_directory(path, err);
 
@@ -61,7 +63,7 @@ int main()
 	else
 	{
 		cout << "\u001b[2J";
-		cout << "\nCreating directory... \n";
+		cout << "\nCreating directory... " << endl;
 	}
 
 
@@ -71,6 +73,8 @@ int main()
 	cout << "\n## PROJECT DETAILS ##\n"
 		<< "Project name: " << projectName << '\n'
 		<< "Author:       " << author << '\n';
+
+	cout << "Created directory at " << path.make_preferred() << endl;
 
 	// Make directory with project name
 	/*auto path = fs::path{ "C:\\Users\\rsamo\\test" };*/
