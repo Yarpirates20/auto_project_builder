@@ -1,16 +1,19 @@
 #include <iostream>
 #include <string>
-#include <direct.h>
+#include <filesystem>
 using namespace std;
+namespace fs = std::filesystem;
 
 // PROTOTYPES
 string getProjectName();
 string getAuthorName();
 bool validateProjectName(string);
 bool validateAuthorName(string);
+void createDirectory(string);
 
 int main()
 {
+
 	// Get user input
 	string projectName = getProjectName();
 	string author = getAuthorName();
@@ -41,8 +44,28 @@ int main()
 		}
 	}
 
+
+	// Create directory using project name
+	auto err = std::error_code{};
+	auto basepath = fs::path{ "C:\\Users\\rsamo\\test" };
+	auto path = basepath / projectName;
+
+	auto success = fs::create_directory(path, err);
+
+	// Check whether error_code object holds code of an error with method value() 
+	// If value is not 0, use the message() method to retrieve and print error code.
+	if (err.value() != 0)
+	{
+		cout << err.message();
+	}
+	else
+	{
+		cout << "\u001b[2J";
+		cout << "\nCreating directory... \n";
+	}
+
+
 	// Clear screen
-	cout << "\u001b[2J";
 
 	// Output project details
 	cout << "\n## PROJECT DETAILS ##\n"
@@ -50,10 +73,11 @@ int main()
 		<< "Author:       " << author << '\n';
 
 	// Make directory with project name
-	string parentDir = "C:\\Users\\rsamo\\test";
-	string dir = projectName;
+	/*auto path = fs::path{ "C:\\Users\\rsamo\\test" };*/
+	/*string dir = projectName;*/
+	
 
-	_mkdir(string(parentDir + "\\" + dir).c_str());
+	
 	return 0;
 }
 
@@ -104,4 +128,9 @@ bool validateAuthorName(string authorString)
 	}
 
 	return true;
+}
+
+void createDirectory(string pName)
+{
+	
 }
