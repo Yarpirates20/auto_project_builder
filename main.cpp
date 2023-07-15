@@ -22,12 +22,14 @@ int main()
 
 	if (validateProjectName(projectName) == false)
 	{
-		cout << "\nERROR: Invalid project name!\n";
+		cout << "\nERROR: Invalid project name! Exiting.\n";
+		exit(1);
 	}
 	else
 	{
 		cout << "\nPROJECT NAME VALID!\n";
 	}
+
 	return 0;
 }
 
@@ -47,6 +49,7 @@ string getAuthorName()
 	return author;
 }
 
+// Returns true if project name is between 1-40 chars in length and only contains alphanumeric (A-za-z0-9) or dash ('-')
 bool validateProjectName(string pname)
 {
 	// TODO: Validate that project name contains only letters, dashes, and numbers, and is bettwen 1-40 char in length
@@ -54,13 +57,27 @@ bool validateProjectName(string pname)
 	{
 		return false;
 	}
-	else if (!isalnum)
+	
+	for (auto c : pname)
+	{
+		if (!isalnum(c) && c != '-')
+		{
+			return false;
+			//break;
+		}
+	}
+
+	return true;
+	
+}
+
+// Returns true if author name is between 1-40 chars in length
+bool validateAuthorName(string authorString)
+{
+	if (authorString.length() < 1 || authorString.length() > 40)
 	{
 		return false;
 	}
-	else
-	{
-		return true;
-	}
-	
+
+	return true;
 }
