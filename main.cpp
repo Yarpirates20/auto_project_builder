@@ -10,33 +10,37 @@ bool validateAuthorName(string);
 
 int main()
 {
-	// TODO: use c-string array with size 40 for project name
-	// Validate by checking if each char isnum, isalpha, or is '-'
-	// Change function type to const char *
+	// Get user input
 	string projectName = getProjectName();
 	string author = getAuthorName();
 
+	// Validate input
+	while (validateProjectName(projectName) == false)
+	{
+		cout << "\nERROR: Invalid project name. Try again.\n";
+		projectName = getProjectName();
+	}
+
+	while (!validateAuthorName(author))
+	{
+		cout << "\nERROR: Invalid author name. Try again.\n";
+		author = getAuthorName();
+	}
+
+	// Clear screen
+	cout << "\u001b[2J";
+
+	// Output project details
 	cout << "\n## PROJECT DETAILS ##\n"
 		<< "Project name: " << projectName << '\n'
 		<< "Author:       " << author << '\n';
-
-	if (validateProjectName(projectName) == false)
-	{
-		cout << "\nERROR: Invalid project name! Exiting.\n";
-		exit(1);
-	}
-	else
-	{
-		cout << "\nPROJECT NAME VALID!\n";
-	}
-
 	return 0;
 }
 
 string getProjectName()
 {
 	string projectName;
-	cout << "What is the name of your project?\n";
+	cout << "\nWhat is the name of your project?\n";
 	getline(cin, projectName);
 	return projectName;
 }
