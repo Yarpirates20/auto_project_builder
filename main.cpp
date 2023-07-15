@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <direct.h>
 using namespace std;
 
 // PROTOTYPES
@@ -13,18 +14,31 @@ int main()
 	// Get user input
 	string projectName = getProjectName();
 	string author = getAuthorName();
+	int attempts = 0;
 
 	// Validate input
-	while (validateProjectName(projectName) == false)
+	while ((!validateProjectName(projectName)) || (!validateAuthorName(author)))
 	{
-		cout << "\nERROR: Invalid project name. Try again.\n";
-		projectName = getProjectName();
-	}
+		if (!validateProjectName(projectName))
+		{
+			cout << "\nERROR: Invalid project name. Try again.\n";
+			projectName = getProjectName();
+			attempts++;
+		}
 
-	while (!validateAuthorName(author))
-	{
-		cout << "\nERROR: Invalid author name. Try again.\n";
-		author = getAuthorName();
+		if (!validateAuthorName(author))
+		{
+			cout << "\nERROR: Invalid author name. Try again.\n";
+			author = getAuthorName();
+			attempts++;
+		}
+
+
+		if (attempts >= 3)
+		{
+			cout << "\nERROR: Too many attempts. Exiting program.\n";
+			exit(1);
+		}
 	}
 
 	// Clear screen
@@ -34,6 +48,12 @@ int main()
 	cout << "\n## PROJECT DETAILS ##\n"
 		<< "Project name: " << projectName << '\n'
 		<< "Author:       " << author << '\n';
+
+	// Make directory with project name
+	string parentDir = "C:\\Users\\rsamo\\test";
+	string dir = projectName;
+
+	_mkdir(string(parentDir + "\\" + dir).c_str());
 	return 0;
 }
 
@@ -61,7 +81,7 @@ bool validateProjectName(string pname)
 	{
 		return false;
 	}
-	
+
 	for (auto c : pname)
 	{
 		if (!isalnum(c) && c != '-')
@@ -72,7 +92,7 @@ bool validateProjectName(string pname)
 	}
 
 	return true;
-	
+
 }
 
 // Returns true if author name is between 1-40 chars in length
