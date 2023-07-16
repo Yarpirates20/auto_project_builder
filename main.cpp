@@ -12,6 +12,7 @@ string getProjectName();
 string getAuthorName();
 bool validateProjectName(string);
 bool validateAuthorName(string);
+void createREADME(string, string);
 
 
 int main()
@@ -64,6 +65,16 @@ int main()
 
 	auto success = fs::create_directory(path, err);
 
+	// Add readme to directory
+	auto readme = path / "README.md";
+	ofstream outfile(readme);
+
+	outfile.open(readme);
+
+	outfile << "This is going to be a README, but now it's a READYOU because \n";
+
+	outfile.close();
+
 	// Check whether error_code object holds code of an error with method value() 
 	// If value is not 0, use the message() method to retrieve and print error code.
 	if (err.value() != 0)
@@ -83,8 +94,8 @@ int main()
 		<< "Author:       " << author << '\n';
 
 	cout << "Created directory at " << path.make_preferred() << endl;
-	
-	
+
+
 	return 0;
 }
 
@@ -135,5 +146,10 @@ bool validateAuthorName(string authorString)
 	}
 
 	return true;
+}
+
+void createREADME(string projectName, string author)
+{
+
 }
 
