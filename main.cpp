@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
+#include <chrono>
 #include <filesystem>
+#include <fstream>
+
 using namespace std;
 namespace fs = std::filesystem;
 
@@ -9,15 +12,17 @@ string getProjectName();
 string getAuthorName();
 bool validateProjectName(string);
 bool validateAuthorName(string);
-void createDirectory(string);
+
 
 int main()
 {
 
 	// Get user input
-	string projectName = getProjectName();
-	string author = getAuthorName();
+	//string projectName = getProjectName();
+	//string author = getAuthorName();
 	int attempts = 0;
+	string projectName = "testProject";
+	string author = "Rob Test";
 
 	// Validate input
 	while ((!validateProjectName(projectName)) || (!validateAuthorName(author)))
@@ -44,6 +49,11 @@ int main()
 		}
 	}
 
+	// Get current time in unix timestamp format
+	auto now = std::chrono::system_clock::now();
+	auto timestamp = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
+	projectName += to_string(timestamp);
+
 
 	// Create directory using project name
 	auto err = std::error_code{};
@@ -67,20 +77,13 @@ int main()
 	}
 
 
-	// Clear screen
-
 	// Output project details
 	cout << "\n## PROJECT DETAILS ##\n"
 		<< "Project name: " << projectName << '\n'
 		<< "Author:       " << author << '\n';
 
 	cout << "Created directory at " << path.make_preferred() << endl;
-
-	// Make directory with project name
-	/*auto path = fs::path{ "C:\\Users\\rsamo\\test" };*/
-	/*string dir = projectName;*/
 	
-
 	
 	return 0;
 }
@@ -134,7 +137,3 @@ bool validateAuthorName(string authorString)
 	return true;
 }
 
-void createDirectory(string pName)
-{
-	
-}
