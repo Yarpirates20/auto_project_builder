@@ -66,10 +66,10 @@ int main()
 	auto success = fs::create_directory(path, err);
 
 	// Add readme to directory
-	auto readme = path / "README.md";
-	ofstream outfile(readme);
+	auto readmePath = path / "README.md";
+	ofstream outfile;
 
-	outfile.open(readme);
+	outfile.open(readmePath);
 
 	outfile << "This is going to be a README, but now it's a READYOU because \n";
 
