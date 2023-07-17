@@ -3,6 +3,7 @@
 #include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <inja/inja.hpp>
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -94,6 +95,7 @@ int main()
 		<< "Author:       " << author << '\n';
 
 	cout << "Created directory at " << path.make_preferred() << endl;
+	cout << "Created file at " << readmePath.make_preferred() << endl;
 
 
 	return 0;
