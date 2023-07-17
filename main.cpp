@@ -6,6 +6,7 @@
 #include <inja/inja.hpp>
 
 using namespace std;
+using namespace inja;
 namespace fs = std::filesystem;
 
 // PROTOTYPES
@@ -13,7 +14,7 @@ string getProjectName();
 string getAuthorName();
 bool validateProjectName(string);
 bool validateAuthorName(string);
-void createREADME(string, string);
+string createREADME(string, string);
 
 
 int main()
@@ -97,6 +98,9 @@ int main()
 	cout << "Created directory at " << path.make_preferred() << endl;
 	cout << "Created file at " << readmePath.make_preferred() << endl;
 
+	string README = createREADME(projectName, author);
+	cout << "Rendered README " << README << endl;
+
 
 	return 0;
 }
@@ -150,8 +154,16 @@ bool validateAuthorName(string authorString)
 	return true;
 }
 
-void createREADME(string projectName, string author)
+string createREADME(string projectName, string author)
 {
+	Environment env;
+	json data;
+	Template temp = env.parse_template("./README.md.template");
+	data["projectName", "author"] = projectName, author;
 
+	string result = env.render(temp, data);
+	return result;
 }
+
+
 
