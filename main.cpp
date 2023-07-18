@@ -107,6 +107,20 @@ int main()
 	//	cout << "\nCreating directory... " << endl;
 	//}
 
+	//##### TODO.MD TEMPLATE #####
+		// Read from template in project directory
+	temp = env.parse_template("C:/Users/rsamo/source/repos/auto_project_builder/TODO.md.template");
+
+	//Write to TODO.md in project directory
+	env.write(temp, data, path_string + "/TODO.md");
+
+	//##### main.cpp TEMPLATE #####
+		// Read from template in project directory
+	temp = env.parse_template("C:/Users/rsamo/source/repos/auto_project_builder/main.cpp.template");
+
+	//Write to TODO.md in project directory
+	env.write(temp, data, path_string + "/main.cpp");
+
 
 	// Output project details
 	cout << "\n## PROJECT DETAILS ##\n"

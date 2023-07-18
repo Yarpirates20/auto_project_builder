@@ -138,8 +138,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="main.cpp.template" />
     <None Include="README.md.template" />
-    <None Include="TODO.md" />
+    <None Include="TODO.md.template" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

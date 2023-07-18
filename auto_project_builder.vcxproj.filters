@@ -21,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md.template" />
-    <None Include="TODO.md" />
+    <None Include="TODO.md.template" />
+    <None Include="main.cpp.template" />
   </ItemGroup>
 </Project>
