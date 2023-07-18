@@ -14,7 +14,7 @@ string getProjectName();
 string getAuthorName();
 bool validateProjectName(string);
 bool validateAuthorName(string);
-string createREADME(string, string);
+//string createREADME(string, string);
 
 
 int main()
@@ -71,9 +71,29 @@ int main()
 	auto readmePath = path / "README.md";
 	ofstream outfile;
 
+	//##################
+	// Fix template problem
+	// Render from template
+	//Environment env {"C:\\Users\\rsamo\\test\\" + projectName};
+	json data;
+	//Template temp = env.parse_template("./README.md.template");
+	data["projectName"] = projectName;
+	data["author"] = author;
+
+	//string result = env.render(temp, data);
+	// Open and write to file
+	string templatePN = render("Welcome to {{ projectName }}!", data);
+	string templateAuth = render("Created by {{ author }}", data);
+
+	/*cout << templatePN << templateAuth << endl;*/
+
+	
 	outfile.open(readmePath);
 
-	outfile << "This is going to be a README, but now it's a READYOU because \n";
+	outfile << "\n" << templatePN << endl;
+	outfile << "\n\n" << templateAuth << endl;
+	
+	//outfile << "\n\n";
 
 	outfile.close();
 
@@ -98,8 +118,8 @@ int main()
 	cout << "Created directory at " << path.make_preferred() << endl;
 	cout << "Created file at " << readmePath.make_preferred() << endl;
 
-	string README = createREADME(projectName, author);
-	cout << "Rendered README " << README << endl;
+	//string README = createREADME(projectName, author);
+	/*cout << "Rendered README ";*/
 
 
 	return 0;
@@ -154,16 +174,17 @@ bool validateAuthorName(string authorString)
 	return true;
 }
 
-string createREADME(string projectName, string author)
-{
-	Environment env;
-	json data;
-	Template temp = env.parse_template("./README.md.template");
-	data["projectName", "author"] = projectName, author;
-
-	string result = env.render(temp, data);
-	return result;
-}
+//string createREADME(string projectName, string author)
+//{
+//	Environment env;
+//	json data;
+//	Template temp = env.parse_template("./README.md.template");
+//	data["projectName"] = projectName;
+//	data["author"] = author;
+//
+//	string result = env.render(temp, data);
+//	return result;
+//}
 
 
 
