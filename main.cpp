@@ -68,35 +68,25 @@ int main()
 	auto success = fs::create_directory(path, err);
 
 	// Add readme to directory
-	auto readmePath = path / "README.md";
-	ofstream outfile;
+	//auto readmePath = path / "README.md";
+	//ofstream outfile;
 
-	//##################
-	// Fix template problem
-	// Render from template
+	
+	// ### Render from template ###
+	// Create string from path to use with Inja since it only accepts strings 
 	string path_string{ path.string() };
+
+	// Create template environment and json to store project data
 	Environment env;
 	json data;
 	data["projectName"] = projectName;
 	data["author"] = author;
+
+	// Read from template in project directory
 	Template temp = env.parse_template("C:/Users/rsamo/source/repos/auto_project_builder/README.md.template");
 
+	//Write to README.md in project directory
 	env.write(temp, data, path_string + "/README.md");
-	// Open and write to file
-	//string templatePN = render("Welcome to {{ projectName }}!", data);
-	//string templateAuth = render("Created by {{ author }}", data);
-
-	/*cout << templatePN << templateAuth << endl;*/
-
-	
-	//outfile.open(readmePath);
-
-	//outfile << "\n" << templatePN << endl;
-	//outfile << "\n\n" << templateAuth << endl;
-	
-	//outfile << "\n\n";
-
-	//outfile.close();
 
 	// Check whether error_code object holds code of an error with method value() 
 	// If value is not 0, use the message() method to retrieve and print error code.
@@ -116,11 +106,10 @@ int main()
 		<< "Project name: " << projectName << '\n'
 		<< "Author:       " << author << '\n';
 
-	cout << "Created directory at " << path.make_preferred() << endl;
-	cout << "Created file at " << readmePath.make_preferred() << endl;
+	cout << "Created directory at " << path_string << endl;
+	cout << "Created file at " << path_string << "\\README.md" << endl;
 
-	//string README = createREADME(projectName, author);
-	/*cout << "Rendered README ";*/
+	
 
 
 	return 0;
