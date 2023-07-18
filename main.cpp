@@ -26,7 +26,6 @@ int main()
 	int attempts = 0;
 	string projectName = "testProject";
 	string author = "Rob Test";
-
 	// Validate input
 	while ((!validateProjectName(projectName)) || (!validateAuthorName(author)))
 	{
@@ -67,9 +66,17 @@ int main()
 
 	auto success = fs::create_directory(path, err);
 
-	// Add readme to directory
-	//auto readmePath = path / "README.md";
-	//ofstream outfile;
+	/* Check whether error_code object holds code of an error witmethod value() 
+	 If value is not 0, use the message() method to retrieve and print error code.*/
+	if (err.value() != 0)
+	{
+		cout << err.message();
+	}
+	else
+	{
+		cout << "\u001b[2J";
+		cout << "\nCreating directory... " << endl;
+	}
 
 	
 	// ### Render from template ###
@@ -90,15 +97,15 @@ int main()
 
 	// Check whether error_code object holds code of an error with method value() 
 	// If value is not 0, use the message() method to retrieve and print error code.
-	if (err.value() != 0)
-	{
-		cout << err.message();
-	}
-	else
-	{
-		cout << "\u001b[2J";
-		cout << "\nCreating directory... " << endl;
-	}
+	//if (err.value() != 0)
+	//{
+	//	cout << err.message();
+	//}
+	//else
+	//{
+	//	cout << "\u001b[2J";
+	//	cout << "\nCreating directory... " << endl;
+	//}
 
 
 	// Output project details
