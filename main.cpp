@@ -74,28 +74,29 @@ int main()
 	//##################
 	// Fix template problem
 	// Render from template
-	//Environment env {"C:\\Users\\rsamo\\test\\" + projectName};
+	string path_string{ path.string() };
+	Environment env;
 	json data;
-	//Template temp = env.parse_template("./README.md.template");
 	data["projectName"] = projectName;
 	data["author"] = author;
+	Template temp = env.parse_template("C:/Users/rsamo/source/repos/auto_project_builder/README.md.template");
 
-	//string result = env.render(temp, data);
+	env.write(temp, data, path_string + "/README.md");
 	// Open and write to file
-	string templatePN = render("Welcome to {{ projectName }}!", data);
-	string templateAuth = render("Created by {{ author }}", data);
+	//string templatePN = render("Welcome to {{ projectName }}!", data);
+	//string templateAuth = render("Created by {{ author }}", data);
 
 	/*cout << templatePN << templateAuth << endl;*/
 
 	
-	outfile.open(readmePath);
+	//outfile.open(readmePath);
 
-	outfile << "\n" << templatePN << endl;
-	outfile << "\n\n" << templateAuth << endl;
+	//outfile << "\n" << templatePN << endl;
+	//outfile << "\n\n" << templateAuth << endl;
 	
 	//outfile << "\n\n";
 
-	outfile.close();
+	//outfile.close();
 
 	// Check whether error_code object holds code of an error with method value() 
 	// If value is not 0, use the message() method to retrieve and print error code.
