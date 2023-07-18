@@ -131,6 +131,8 @@ int main()
 
 	cout << "Created directory at " << path_string << endl;
 	cout << "Created file at " << path_string << "\\README.md" << endl;
+	cout << "Created file at " << path_string << "\\TODO.md" << endl;
+	cout << "Created file at " << path_string << "\\main.cpp" << endl;
 
 	
 
