@@ -14,7 +14,7 @@ string getProjectName();
 string getAuthorName();
 bool validateProjectName(string);
 bool validateAuthorName(string);
-void writeFileFromTemplate();
+//void writeFileFromTemplate();
 //string createREADME(string, string);
 
 
@@ -25,8 +25,8 @@ int main()
 	//string projectName = getProjectName();
 	//string author = getAuthorName();
 	int attempts = 0;
-	string projectName = "testProject";
-	string author = "Rob Test";
+	string projectName = getProjectName();
+	string author = getAuthorName();
 	// Validate input
 	while ((!validateProjectName(projectName)) || (!validateAuthorName(author)))
 	{
@@ -53,9 +53,9 @@ int main()
 	}
 
 	// Get current time in unix timestamp format
-	auto now = std::chrono::system_clock::now();
+	/*auto now = std::chrono::system_clock::now();
 	auto timestamp = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
-	projectName += to_string(timestamp);
+	projectName += to_string(timestamp);*/
 
 
 	// Create directory using project name
