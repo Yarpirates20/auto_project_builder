@@ -14,6 +14,7 @@ string getProjectName();
 string getAuthorName();
 bool validateProjectName(string);
 bool validateAuthorName(string);
+void writeFileFromTemplate();
 //string createREADME(string, string);
 
 
@@ -61,7 +62,7 @@ int main()
 	auto err = std::error_code{};
 	auto basepath = fs::path{ "C:\\Users\\rsamo\\test" };
 	auto path = basepath / projectName;
-	path.make_preferred();
+	//path.make_preferred();
 
 
 	auto success = fs::create_directory(path, err);
@@ -82,6 +83,7 @@ int main()
 	// ### Render from template ###
 	// Create string from path to use with Inja since it only accepts strings 
 	string path_string{ path.string() };
+	string templatePath = "C:/Users/rsamo/source/repos/auto_project_builder/";
 
 	// Create template environment and json to store project data
 	Environment env;
@@ -90,7 +92,7 @@ int main()
 	data["author"] = author;
 
 	// Read from template in project directory
-	Template temp = env.parse_template("C:/Users/rsamo/source/repos/auto_project_builder/README.md.template");
+	Template temp = env.parse_template(templatePath + "README.md.template");
 
 	//Write to README.md in project directory
 	env.write(temp, data, path_string + "/README.md");
